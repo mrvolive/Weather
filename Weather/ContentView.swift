@@ -11,6 +11,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color.blue
+                .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("Cupertino, CA")
                     .font(.largeTitle)
