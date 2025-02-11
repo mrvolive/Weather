@@ -12,6 +12,7 @@ struct ContentView: View {
         ZStack {
             Color.blue
                 .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 Text("Cupertino, CA")
                     .font(.largeTitle)
@@ -28,10 +29,16 @@ struct ContentView: View {
                     .font(.system(size: 70,
                                   weight: .medium))
                     .foregroundStyle(.white)
+                    .padding(.bottom, 40)
                 
-                HStack{
-                    WeatherDayView(📆: "Mon", 🌆: "sun.max.fill", 🌡️: "25°")
+                HStack(spacing: 20){
+                    WeatherDayView(📆: "MON", 🌆: "sun.max.fill", 🌡️: 25)
+                    WeatherDayView(📆: "TUE", 🌆: "sun.max.fill", 🌡️: 15)
+                    WeatherDayView(📆: "WED", 🌆: "sun.max.fill", 🌡️: 20)
+                    WeatherDayView(📆: "THU", 🌆: "sun.max.fill", 🌡️: 5)
+                    WeatherDayView(📆: "FRI", 🌆: "sun.max.fill", 🌡️: 10)
                 }
+                
             }
         }
     }
@@ -40,7 +47,7 @@ struct ContentView: View {
 struct WeatherDayView: View {
     var 📆: String
     var 🌆: String
-    var 🌡️: String
+    var 🌡️: Int
     
     var body: some View {
         VStack {
@@ -52,6 +59,9 @@ struct WeatherDayView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
+            
+            Text("\(🌡️)")
+                .foregroundStyle(.white)
         }
         
     }
