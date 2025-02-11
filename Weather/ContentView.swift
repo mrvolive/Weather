@@ -9,11 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Cupertino, CA")
-                .font(.largeTitle)
-                .bold()
-            Image(systemName: "cloud.sun.fill")
+        ZStack {
+            Color.blue
+            VStack {
+                Text("Cupertino, CA")
+                    .font(.largeTitle)
+                    .bold()
+                Image(systemName: "cloud.sun.fill")
+                    .renderingMode(.original)
+            }
         }
     }
 }
