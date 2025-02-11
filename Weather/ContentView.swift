@@ -39,6 +39,20 @@ struct ContentView: View {
                     WeatherDayView(📆: "FRI", 🌆: "sun.max.fill", 🌡️: 10)
                 }
                 
+                Spacer()
+                
+                Button {
+                    print("Button tapped")
+                } label: {
+                    Text("Change Day Time")
+                        .frame(width: 280, height: 50)
+                        .background(.white)
+                        .font(.title)
+                        .cornerRadius(50)
+                }
+                
+                Spacer()
+                
             }
         }
     }
