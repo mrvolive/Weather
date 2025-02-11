@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color.blue
+            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -46,9 +46,9 @@ struct ContentView: View {
                 } label: {
                     Text("Change Day Time")
                         .frame(width: 280, height: 50)
-                        .background(.white)
+                        .background(.black)
                         .font(.title)
-                        .cornerRadius(50)
+                        .cornerRadius(20)
                 }
                 
                 Spacer()
