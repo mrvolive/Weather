@@ -13,6 +13,7 @@ struct ContentView: View {
             Text("Cupertino, CA")
                 .font(.largeTitle)
                 .bold()
+            Image(systemName: "cloud.sun.fill")
         }
     }
 }
