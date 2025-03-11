@@ -9,20 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var isNight: Bool = false
+    @State private var 🌚: Bool = false
+    
+    @EnvironmentObject var forecastsVM: ForecastsViewModel
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [🌚 ? .black : .blue, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Cupertino, CA")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundStyle(.white)
                 
-                Image(systemName: "cloud.sun.fill")
+                HStack {
+                    Text("Cupertino, CA")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundStyle(.white)
+                    Button {
+                        forecastsVM.reloadTemperature()
+                    } label: {
+                        Image(systemName: "arrow.clockwise.circle")
+                            .font(.title)
+                            .foregroundStyle(.white)
+                    }
+                }
+                Image(systemName: 🌚 ? "moon.stars.fill" : "cloud.sun.fill")
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -35,18 +46,18 @@ struct ContentView: View {
                     .padding(.bottom, 40)
                 
                 HStack(spacing: 20){
-                    WeatherDayView(📆: "MON", 🌆: "sun.max.fill", 🌡️: 25)
-                    WeatherDayView(📆: "TUE", 🌆: "sun.max.fill", 🌡️: 15)
-                    WeatherDayView(📆: "WED", 🌆: "sun.max.fill", 🌡️: 20)
-                    WeatherDayView(📆: "THU", 🌆: "sun.max.fill", 🌡️: 5)
-                    WeatherDayView(📆: "FRI", 🌆: "sun.max.fill", 🌡️: 10)
+                    WeatherDayView(📆: forecastsVM.forecasts[0].📆, 🌆: "sun.max.fill", 🌡️: forecastsVM.forecasts[0].🌡️)
+                    WeatherDayView(📆: forecastsVM.forecasts[1].📆, 🌆: "sun.max.fill", 🌡️: forecastsVM.forecasts[1].🌡️)
+                    WeatherDayView(📆: forecastsVM.forecasts[2].📆, 🌆: "sun.max.fill", 🌡️: forecastsVM.forecasts[2].🌡️)
+                    WeatherDayView(📆: forecastsVM.forecasts[3].📆, 🌆: "sun.max.fill", 🌡️: forecastsVM.forecasts[3].🌡️)
+                    WeatherDayView(📆: forecastsVM.forecasts[4].📆, 🌆: "sun.max.fill", 🌡️: forecastsVM.forecasts[4].🌡️)
                 }
                 
                 Spacer()
                 
                 Button {
-                    print("Button tapped")
-                    isNight.toggle()
+                    print("isNight:" ,🌚)
+                    🌚.toggle()
                 } label: {
                     Text("Change Day Time")
                         .frame(width: 280, height: 50)
@@ -59,6 +70,7 @@ struct ContentView: View {
             }
         }
     }
+
 }
 
 struct WeatherDayView: View {
@@ -86,4 +98,5 @@ struct WeatherDayView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(ForecastsViewModel())
 }
